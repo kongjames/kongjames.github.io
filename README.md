@@ -1,3 +1,3 @@
 # kongjames.github.io
-Click below for resume
+Click the link for my resume
 https://kongjames.github.io/gh-pages/index.html
