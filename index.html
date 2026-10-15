@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>James Kong — AI Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbfbf9; --bg-2:#ffffff; --ink:#101828; --ink-2:#344054; --muted:#667085; --line:#e4e7ec;
+    --teal:#0f766e; --teal-dark:#115e59; --teal-soft:#ecfdf5; --amber:#b45309; --amber-soft:#fffbeb;
+    --card:#ffffff; --chip:#f2f4f7; --shadow:0 12px 32px rgba(16,24,40,.07);
+    --radius:18px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b0f14; --bg-2:#111827; --ink:#f9fafb; --ink-2:#d0d5dd; --muted:#98a2b3; --line:#1f2937;
+      --teal:#2dd4bf; --teal-dark:#5eead4; --teal-soft:#0f2a27; --amber:#fbbf24; --amber-soft:#2a2107;
+      --card:#111827; --chip:#1f2937; --shadow:0 12px 32px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Manrope",system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  .nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .mark{width:38px;height:38px;border-radius:10px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-weight:800;letter-spacing:-.02em;font-size:15px}
+  .brand b{font-size:15px;letter-spacing:-.01em}
+  .brand span{display:block;font-size:12px;color:var(--muted);font-weight:600;line-height:1.1}
+  .nav-links{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+  .nav-links a{text-decoration:none;font-size:13.5px;font-weight:700;color:var(--ink-2);padding:8px 11px;border-radius:999px}
+  .nav-links a:hover{background:var(--chip)}
+  .hero{padding:44px 0 20px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-dark);background:var(--teal-soft);border:1px solid color-mix(in srgb, var(--teal) 22%, transparent);padding:7px 10px;border-radius:999px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px color-mix(in srgb, var(--teal) 18%, transparent)}
+  h1{font-family:"Newsreader",Georgia,serif;font-size:clamp(38px,6vw,64px);line-height:.98;letter-spacing:-.02em;font-weight:600;margin:18px 0 14px;max-width:820px}
+  h1 em{font-style:italic;color:var(--teal-dark)}
+  .lede{font-size:clamp(17px,2.2vw,20px);color:var(--ink-2);max-width:720px;margin:0}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;font-size:14px;padding:12px 16px;border-radius:999px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink)}
+  .btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .btn.placeholder{color:var(--muted);background:transparent;border-style:dashed;cursor:default}
+  .btn small{font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.75;border-left:1px solid currentColor;padding-left:8px;margin-left:2px}
+  .hero-grid{display:grid;grid-template-columns:1.55fr .85fr;gap:18px;margin-top:28px;align-items:stretch}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .panel.pad{padding:22px}
+  .panel h3{margin:0 0 6px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .panel p{margin:0;color:var(--ink-2);font-size:15px}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden}
+  .stat{padding:20px;border-bottom:1px solid var(--line)}
+  .stat:nth-child(odd){border-right:1px solid var(--line)}
+  .stat:nth-last-child(-n+2){border-bottom:none}
+  .stat strong{display:block;font-size:28px;line-height:1;letter-spacing:-.03em}
+  .stat span{display:block;margin-top:6px;font-size:13px;color:var(--muted);font-weight:600;line-height:1.35}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .flow span{font-size:12.5px;font-weight:700;background:var(--chip);border:1px solid var(--line);padding:7px 9px;border-radius:999px;color:var(--ink-2)}
+  .flow i{font-style:normal;color:var(--muted);align-self:center}
+  section{padding:32px 0}
+  .sec-head{margin-bottom:16px}
+  .sec-head h2{font-family:"Newsreader",Georgia,serif;font-size:clamp(28px,4vw,40px);line-height:1.05;letter-spacing:-.02em;margin:6px 0 6px;font-weight:600}
+  .kicker{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-dark)}
+  .sec-head p{margin:0;color:var(--muted);max-width:640px;font-size:15px}
+  /* Project filter */
+  .filter-bar{padding:22px 0 2px}
+  .filter-bar label{display:block;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .filter{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink-2);font:inherit;font-size:14px;font-weight:800;padding:10px 16px;border-radius:999px;cursor:pointer;min-height:44px}
+  .filter[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  /* Cards */
+  .fleet{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .agent{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .agent.wide{grid-column:1/-1}
+  .agent-top{padding:18px 18px 10px;display:flex;gap:14px;align-items:flex-start;justify-content:space-between}
+  .num{width:36px;height:36px;flex:0 0 36px;border-radius:10px;background:var(--teal-soft);color:var(--teal-dark);display:grid;place-items:center;font-weight:800;font-size:14px;border:1px solid color-mix(in srgb, var(--teal) 18%, transparent)}
+  .agent h3{margin:0;font-size:18px;line-height:1.2;letter-spacing:-.01em}
+  .agent .sub{margin:3px 0 0;color:var(--muted);font-size:13.5px;line-height:1.4}
+  .badge{flex:0 0 auto;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 8px;border-radius:999px;background:var(--chip);border:1px solid var(--line);color:var(--ink-2)}
+  .badge.live{color:var(--teal-dark);background:var(--teal-soft)}
+  .delivers{padding:2px 18px 0;display:flex;gap:8px;align-items:baseline}
+  .delivers label{flex:0 0 auto;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .delivers p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.45;font-weight:600}
+  .bubble{margin:12px 18px 0;background:var(--teal-soft);border:1px solid color-mix(in srgb, var(--teal) 22%, transparent);border-radius:4px 14px 14px 14px;padding:11px 13px;font-size:13.5px;line-height:1.55;color:var(--ink-2);white-space:pre-line}
+  .bubble span{display:block;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:5px;white-space:normal}
+  .card-details{margin-top:14px;border-top:1px solid var(--line)}
+  .card-details summary{list-style:none;cursor:pointer;padding:12px 18px;font-size:13.5px;font-weight:800;color:var(--ink);display:flex;justify-content:space-between;align-items:center;min-height:44px}
+  .card-details summary::-webkit-details-marker{display:none}
+  .card-details summary .chev{color:var(--muted);transition:transform .15s ease}
+  .card-details[open ] summary .chev{transform:rotate(180deg)}
+  .rows{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+  .agent.wide .rows{grid-template-columns:repeat(3,1fr)}
+  .row{padding:12px 14px 14px;border-right:1px solid var(--line)}
+  .row:last-child{border-right:none}
+  .row label{display:block;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  .row p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.5}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;padding:12px 18px 16px}
+  .tags span{font-size:12px;font-weight:700;color:var(--ink-2);background:var(--chip);padding:6px 8px;border-radius:999px}
+  .evidence{padding:0 18px 4px;font-size:13.5px;color:var(--muted)}
+  .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+  .principle{padding:16px 4px 0;border-top:2px solid var(--ink)}
+  .principle strong{display:block;font-size:15px;margin-bottom:4px}
+  .principle p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+  .telegram-wrap{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .skills{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
+  .skill{padding:18px;border-bottom:1px solid var(--line)}
+  .skill:nth-child(odd){border-right:1px solid var(--line)}
+  .skill:nth-last-child(-n+2){border-bottom:none}
+  .skill h3{margin:0 0 4px;font-size:16px}
+  .skill p{margin:0;color:var(--muted);font-size:14px}
+  .closing{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+  .contact-list{display:grid;gap:10px}
+  .contact-item{display:flex;justify-content:space-between;gap:12px;padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);font-size:14px}
+  .contact-item span{color:var(--muted);font-weight:700}
+  .contact-item b{font-weight:800}
+  footer{padding:28px 0 40px;color:var(--muted);font-size:13.5px}
+  .footer-line{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+  .hidden{display:none !important}
+  @media (max-width:820px){
+    .hero{padding-top:32px}
+    .hero-grid,.fleet,.closing{grid-template-columns:1fr}
+    .principles{grid-template-columns:1fr}
+    .rows,.agent.wide .rows{grid-template-columns:1fr}
+    .row{border-right:none;border-bottom:1px solid var(--line)}
+    .row:last-child{border-bottom:none}
+    .skills{grid-template-columns:1fr}
+    .skill{border-right:none !important}
+    .skill:nth-last-child(-n+2){border-bottom:1px solid var(--line)}
+    .skill:last-child{border-bottom:none}
+    .nav-links{display:none}
+    .agent.wide{grid-column:auto}
+    .delivers{flex-direction:column;gap:2px}
+  }
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} .card-details summary .chev{transition:none} }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="James Kong home">
+      <span class="mark">JK</span>
+      <span><b>James Kong</b><span>AI Systems &amp; Data</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <span class="eyebrow"><span class="dot"></span> Live in production · Delivered to your phone</span>
+    <h1>I build production AI agents that live where <em>decisions happen</em> — on your phone.</h1>
+    <p class="lede">13 agents in Telegram &amp; WhatsApp. They scan on a schedule, stay silent until something matters, then deliver a decision.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#projects">View Projects ↓</a>
+      <span class="btn placeholder" aria-disabled="true">Résumé PDF <small>To be added</small></span>
+      <a class="btn" href="https://linkedin.com/in/kongjames" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn" href="mailto:kong.jameskh@gmail.com">Email</a>
+    </div>
+    <div class="hero-grid">
+      <div class="panel pad">
+        <h3>How these systems work</h3>
+        <p>A watcher checks a source against a baseline and stays silent unless something changed. An analyst step turns the log into a plan.</p>
+        <div class="flow" aria-label="System flow">
+          <span>Schedule</span><i>→</i><span>Scan &amp; Compare</span><i>→</i><span>Change?</span><i>→</i><span>Act / Analyse</span><i>→</i><span>Phone</span>
+        </div>
+      </div>
+      <div class="panel stats" aria-label="Proof at a glance">
+        <div class="stat"><strong>13</strong><span>Production AI agents, live</span></div>
+        <div class="stat"><strong>2</strong><span>Ecosystems: Telegram + WhatsApp</span></div>
+        <div class="stat"><strong>4</strong><span>Cadences: daily · weekly · monthly · quarterly</span></div>
+        <div class="stat"><strong>Feb 2026</strong><span>Running in production since</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT FILTER -->
+  <div class="wrap filter-bar" id="projects">
+    <label for="projectFilters">Projects — tap to filter</label>
+    <div class="filters" id="projectFilters" role="group" aria-label="Filter projects by ecosystem">
+      <button class="filter" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter" data-filter="telegram" aria-pressed="false">Telegram</button>
+      <button class="filter" data-filter="whatsapp" aria-pressed="false">WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- WHATSAPP FLEET -->
+  <section id="fleet" data-ecosystem-section="whatsapp" aria-labelledby="fleet-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">WhatsApp · Live in production</div>
+        <h2 id="fleet-title">Muse Agent Fleet</h2>
+        <p>Five scheduled agents on WhatsApp. Tap Details on any card for cadence, sources &amp; method.</p>
+      </div>
+
+      <div class="fleet" id="fleetGrid">
+        <article class="agent" data-ecosystem="whatsapp">
+          <div class="agent-top">
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <span class="num">01</span>
+              <div><h3>Flight Deals — Daily Scan</h3><p class="sub">Watcher for cash &amp; points deals on key routes.</p></div>
+            </div>
+            <span class="badge live">● Live</span>
+          </div>
+          <div class="delivers"><label>Delivers</label><p>WhatsApp alert only when a fare beats baseline.</p></div>
+          <div class="bubble"><span>Sample output</span>✈️ No new deals today · 1 near-miss logged to the watch list</div>
+          <details class="card-details">
+            <summary>Details <span class="chev" aria-hidden="true">▾</span></summary>
+            <div class="rows">
+              <div class="row"><label>Cadence</label><p>Daily scheduled scan</p></div>
+              <div class="row"><label>Scans</label><p>Air Canada, Air France, Cathay Pacific on 4 tracked routes, cash and points, vs. stored baselines.</p></div>
+              <div class="row"><label>Method</label><p>Baseline comparison. Silence unless a fare beats or nears baseline.</p></div>
+            </div>
+            <div class="tags"><span>Web monitoring</span><span>Baseline comparison</span><span>Points + cash</span></div>
+          </details>
+        </article>
+
+        <article class="agent" data-ecosystem="whatsapp">
+          <div class="agent-top">
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <span class="num">02</span>
+              <div><h3>Flight Deals — Monthly Analysis</h3><p class="sub">Monthly planner from the daily watcher's log.</p></div>
+            </div>
+            <span class="badge live">● Live</span>
+          </div>
+          <div class="delivers"><label>Delivers</label><p>WhatsApp planning summary — what moved, what to act on.</p></div>
+          <div class="bubble"><span>Sample output</span>📊 Monthly report — deals found · near-misses · companion-pass progress · next month's watch windows</div>
+          <details class="card-details">
+            <summary>Details <span class="chev" aria-hidden="true">▾</span></summary>
+            <div class="rows">
+              <div class="row"><label>Cadence</label><p>Monthly scheduled review</p></div>
+              <div class="row"><label>Scans</label><p>Shared baselines and the seen-deals log the daily watcher writes.</p></div>
+              <div class="row"><label>Method</label><p>Analyst, not alerter — trends and next actions from the log.</p></div>
+            </div>
+            <div class="tags"><span>Watcher = tripwire</span><span>Analyst = planner</span><span>Shared state</span></div>
+          </details>
+        </article>
+
+        <article class="agent" data-ecosystem="whatsapp">
+          <div class="agent-top">
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <span class="num">03</span>
+              <div><h3>Aeroplan eStore Promo Watch</h3><p class="sub">Change-only monitoring — no noise by design.</p></div>
+            </div>
+            <span class="badge live">● Live</span>
+          </div>
+          <div class="delivers"><label>Delivers</label><p>WhatsApp alert only on a rate change or promo.</p></div>
+          <div class="bubble"><span>Sample output</span>🔔 Rate change — a tracked merchant's earn rate moved · new rate vs old rate · link to shop</div>
+          <details class="card-details">
+            <summary>Details <span class="chev" aria-hidden="true">▾</span></summary>
+            <div class="rows">
+              <div class="row"><label>Cadence</label><p>Daily scheduled check</p></div>
+              <div class="row"><label>Scans</label><p>Public Aeroplan eStore earn rates — Walmart, Apple, Amazon, Best Buy, Lululemon.</p></div>
+              <div class="row"><label>Method</label><p>Change detection. Never a daily “nothing changed.”</p></div>
+            </div>
+            <div class="tags"><span>Change detection</span><span>Public-rate monitoring</span><span>Alert discipline</span></div>
+          </details>
+        </article>
+
+        <article class="agent" data-ecosystem="whatsapp">
+          <div class="agent-top">
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <span class="num">04</span>
+              <div><h3>Chexy Club Dues Agent</h3><p class="sub">Email-to-payment automation for club dues.</p></div>
+            </div>
+            <span class="badge live">● Live</span>
+          </div>
+          <div class="delivers"><label>Delivers</label><p>Automatic Chexy payment update — no manual edit.</p></div>
+          <div class="bubble"><span>Sample output</span>✅ New club statement received — Chexy payment amount updated to match</div>
+          <details class="card-details">
+            <summary>Details <span class="chev" aria-hidden="true">▾</span></summary>
+            <div class="rows">
+              <div class="row"><label>Cadence</label><p>On arrival of monthly statement emails</p></div>
+              <div class="row"><label>Scans</label><p>Monthly statement emails from two member clubs.</p></div>
+              <div class="row"><label>Method</label><p>Email parsing → matching Chexy payment amount updated.</p></div>
+            </div>
+            <div class="tags"><span>Email parsing</span><span>Payment platform</span><span>Automation</span></div>
+          </details>
+        </article>
+
+        <article class="agent wide" data-ecosystem="whatsapp">
+          <div class="agent-top">
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <span class="num">05</span>
+              <div><h3>Chexy Spend Analysis</h3><p class="sub">Monthly BI brief on spend, fees &amp; points.</p></div>
+            </div>
+            <span class="badge live">● Live</span>
+          </div>
+          <div class="delivers"><label>Delivers</label><p>WhatsApp brief: MoM / QoQ / YoY, by card, with charts.</p></div>
+          <div class="bubble"><span>Sample output</span>📈 Monthly spend report — spend + fees by card · MoM change · points earned · charts attached</div>
+          <details class="card-details">
+            <summary>Details <span class="chev" aria-hidden="true">▾</span></summary>
+            <div class="rows">
+              <div class="row"><label>Cadence</label><p>Monthly scheduled analysis</p></div>
+              <div class="row"><label>Scans</label><p>Platform spend and fees, over time and by card.</p></div>
+              <div class="row"><label>Method</label><p>MoM / QoQ / YoY, breakdown by card (Amex Gold, CIBC Aeroplan), points earned, charts.</p></div>
+            </div>
+            <div class="tags"><span>MoM / QoQ / YoY</span><span>Card breakdown</span><span>Charts</span><span>BI reporting</span></div>
+          </details>
+        </article>
+      </div>
+
+      <div class="principles">
+        <div class="principle"><strong>Watcher ≠ Analyst</strong><p>Watcher is a tripwire. Analyst interprets its log.</p></div>
+        <div class="principle"><strong>Change-only alerting</strong><p>Agents speak only when something changes.</p></div>
+        <div class="principle"><strong>Shared baselines</strong><p>Alerts and plans read the same state — never contradict.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TELEGRAM / SENTINEL -->
+  <div class="telegram-wrap" data-ecosystem-section="telegram">
+    <section id="telegram" aria-labelledby="telegram-title">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="kicker">Telegram · Sentinel — Feb 2026–present</div>
+          <h2 id="telegram-title">Sentinel — Market Intelligence Agents</h2>
+          <p>Eight agents on Telegram — signals, not raw feeds.</p>
+        </div>
+
+        <div class="fleet">
+          <article class="agent" data-ecosystem="telegram">
+            <div class="agent-top">
+              <div style="display:flex;gap:14px;align-items:flex-start">
+                <span class="num">A</span>
+                <div><h3>Fed-Policy Intelligence Agent</h3><p class="sub">Weekly NLP scoring of institutional podcasts.</p></div>
+              </div>
+              <span class="badge live">● Live</span>
+            </div>
+            <div class="delivers"><label>Delivers</label><p>QoQ Fed-direction consensus to Telegram.</p></div>
+            <div class="bubble"><span>Sample output</span>At Any Rate (JPMorgan) — Composite: +0.35 · Leaning Hawkish. “If GSEs resume buying MBS at scale, the market faces a $200bn demand shock…”</div>
+            <details class="card-details">
+              <summary>Details <span class="chev" aria-hidden="true">▾</span></summary>
+              <div class="rows">
+                <div class="row"><label>Cadence</label><p>Weekly scheduled run</p></div>
+                <div class="row"><label>Sources</label><p>8 institutional finance podcasts (Goldman Sachs, Morgan Stanley, JPMorgan) — 69 episodes scored.</p></div>
+                <div class="row"><label>Method</label><p>NLP scoring → quarter-over-quarter Fed-direction consensus.</p></div>
+              </div>
+              <div class="tags"><span>NLP scoring</span><span>Podcast analysis</span><span>Fed policy</span></div>
+            </details>
+          </article>
+
+          <article class="agent" data-ecosystem="telegram">
+            <div class="agent-top">
+              <div style="display:flex;gap:14px;align-items:flex-start">
+                <span class="num">B</span>
+                <div><h3>Market Sentiment Agents</h3><p class="sub">2 agents · Daily divergence signals.</p></div>
+              </div>
+              <span class="badge live">● Live</span>
+            </div>
+            <div class="delivers"><label>Delivers</label><p>Daily trading signals to Telegram.</p></div>
+            <div class="bubble"><span>Sample output</span>MARKET SNAPSHOT — SPY · BTC · VIX · yield curve
+SIGNAL — Divergence: retail bullish vs institutional cautious → FADE
+EVIDENCE QUALITY — 7 sources scored</div>
+            <details class="card-details">
+              <summary>Details <span class="chev" aria-hidden="true">▾</span></summary>
+              <div class="rows">
+                <div class="row"><label>Cadence</label><p>Daily scheduled runs</p></div>
+                <div class="row"><label>Sources</label><p>Retail-vs-institutional divergence across 7 live sources; flags market-moving X posts.</p></div>
+                <div class="row"><label>Method</label><p>FinBERT NLP. Walk-forward ML tournament (logistic / kNN / XGBoost / ARIMA); brief self-scores next day; learns from price-impact feedback.</p></div>
+              </div>
+              <div class="tags"><span>FinBERT</span><span>Sentiment divergence</span><span>Feedback loop</span></div>
+            </details>
+          </article>
+
+          <article class="agent wide" data-ecosystem="telegram">
+            <div class="agent-top">
+              <div style="display:flex;gap:14px;align-items:flex-start">
+                <span class="num">C</span>
+                <div><h3>Top-Investor Tracker Agents</h3><p class="sub">2 agents · 13F changes for Berkshire &amp; Leopold.</p></div>
+              </div>
+              <span class="badge live">● Live</span>
+            </div>
+            <div class="delivers"><label>Delivers</label><p>QoQ position-change alerts to Telegram.</p></div>
+            <div class="bubble"><span>Sample output</span>🔔 Situational Awareness LP — 13F filed
+Ticker · Issuer · Shares · % of class — plus chart 📊 + spreadsheet attached</div>
+            <details class="card-details">
+              <summary>Details <span class="chev" aria-hidden="true">▾</span></summary>
+              <div class="rows">
+                <div class="row"><label>Cadence</label><p>SEC 13F filing cycle — quarterly; checks 5×/day, 13D/G polls every 4h</p></div>
+                <div class="row"><label>Sources</label><p>Berkshire Hathaway and Situational Awareness LP (Leopold Aschenbrenner) — SEC 13F filings.</p></div>
+                <div class="row"><label>Method</label><p>13F filings auto-parsed → quarter-over-quarter position changes.</p></div>
+              </div>
+              <div class="tags"><span>SEC 13F parsing</span><span>Position tracking</span><span>QoQ change alerts</span></div>
+            </details>
+          </article>
+
+          <article class="agent" data-ecosystem="telegram">
+            <div class="agent-top">
+              <div style="display:flex;gap:14px;align-items:flex-start">
+                <span class="num">D</span>
+                <div><h3>X-Market News</h3><p class="sub">24/7 daemon for market-moving posts.</p></div>
+              </div>
+              <span class="badge live">● Live</span>
+            </div>
+            <div class="delivers"><label>Delivers</label><p>“MARKET MOVER” alerts to Telegram.</p></div>
+            <div class="bubble"><span>Sample output</span>🚨 MARKET MOVER — @BillAckman (Tier 1)
+EVS 4.2σ · Sentiment: STRONG BULLISH
+Engagement: 12× average</div>
+            <details class="card-details">
+              <summary>Details <span class="chev" aria-hidden="true">▾</span></summary>
+              <div class="rows">
+                <div class="row"><label>Cadence</label><p>Always-on — polls every 5 minutes, 24/7</p></div>
+                <div class="row"><label>Sources</label><p>16 tracked X accounts + Truth Social.</p></div>
+                <div class="row"><label>Method</label><p>Engagement-anomaly detection + FinBERT; source reputation scored by realized track record.</p></div>
+              </div>
+              <div class="tags"><span>Real-time polling</span><span>Anomaly detection</span><span>Source reputation</span></div>
+            </details>
+          </article>
+
+          <article class="agent" data-ecosystem="telegram">
+            <div class="agent-top">
+              <div style="display:flex;gap:14px;align-items:flex-start">
+                <span class="num">E</span>
+                <div><h3>Prediction Engine</h3><p class="sub">Weekly 4-signal picks for 12 AI-infra tickers.</p></div>
+              </div>
+              <span class="badge live">● Live</span>
+            </div>
+            <div class="delivers"><label>Delivers</label><p>BUY / WATCH / HOLD / AVOID picks at 1w / 2w / 4w.</p></div>
+            <div class="bubble"><span>Sample output · Sep 28, 2026</span>📊 AI INFRASTRUCTURE PICKS — Macro: Leaning Hawkish (+1)
+🟡 WATCH: COHR · LITE · MSFT (+1)
+⚪ HOLD: NVDA (0)</div>
+            <details class="card-details">
+              <summary>Details <span class="chev" aria-hidden="true">▾</span></summary>
+              <div class="evidence"><b>Evidence:</b> 120 picks logged since Jul 2026; every outcome scored against SPY.</div>
+              <div class="rows">
+                <div class="row"><label>Cadence</label><p>Weekly run — Mondays</p></div>
+                <div class="row"><label>Sources</label><p>Macro (Fed-policy), X flow, 13F positioning, 8-metric technicals (Golden Volume, EMA/SMA).</p></div>
+                <div class="row"><label>Method</label><p>4 layers fused into a −4…+4 score per ticker.</p></div>
+              </div>
+              <div class="tags"><span>4-layer fusion</span><span>−4…+4 scoring</span><span>Scored vs SPY</span></div>
+            </details>
+          </article>
+
+          <article class="agent" data-ecosystem="telegram">
+            <div class="agent-top">
+              <div style="display:flex;gap:14px;align-items:flex-start">
+                <span class="num">F</span>
+                <div><h3>Congressional Trade Tracker</h3><p class="sub">Pelosi PTR filings, cross-checked.</p></div>
+              </div>
+              <span class="badge live">● Live</span>
+            </div>
+            <div class="delivers"><label>Delivers</label><p>Trade chart + spreadsheet to Telegram.</p></div>
+            <div class="bubble"><span>Sample output</span>📄 New PTR filed — latest trades (60 days): range-bar chart photo + spreadsheet attached · cross-check matched</div>
+            <details class="card-details">
+              <summary>Details <span class="chev" aria-hidden="true">▾</span></summary>
+              <div class="rows">
+                <div class="row"><label>Cadence</label><p>Polls House disclosure filings twice daily · Live Oct 2026</p></div>
+                <div class="row"><label>Sources</label><p>Nancy Pelosi PTR filing PDFs.</p></div>
+                <div class="row"><label>Method</label><p>PDF parsing; each trade cross-checked against a second source — 26 of 27 matched.</p></div>
+              </div>
+              <div class="tags"><span>PDF parsing</span><span>Cross-source verification</span><span>House disclosures</span></div>
+            </details>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section id="build" style="padding-top:28px;padding-bottom:2px" aria-labelledby="build-title">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:4px">
+        <div class="kicker">The build pattern</div>
+        <h2 id="build-title">How each agent is built</h2>
+        <p>Same three steps, every agent.</p>
+      </div>
+      <div class="principles">
+        <div class="principle"><strong>1 · Scheduled trigger</strong><p>The agent starts itself, on time.</p></div>
+        <div class="principle"><strong>2 · Sources + scoring</strong><p>NLP (FinBERT included) or baseline comparison.</p></div>
+        <div class="principle"><strong>3 · Output to phone</strong><p>Only what matters — Telegram or WhatsApp.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" aria-labelledby="skills-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">Capabilities</div>
+        <h2 id="skills-title">Skills, proved by the work above</h2>
+        <p>Every skill maps to an agent on this page.</p>
+      </div>
+      <div class="skills">
+        <div class="skill"><h3>AI Agent Orchestration &amp; Scheduling</h3><p>Scheduled agents, watcher/analyst roles, shared state, change-only delivery.</p></div>
+        <div class="skill"><h3>LLM Tooling</h3><p>Claude, ChatGPT, and MCP tooling across platforms.</p></div>
+        <div class="skill"><h3>Data Pipelines &amp; Web Monitoring</h3><p>Repeated scanning against baselines — not one-off scrapes.</p></div>
+        <div class="skill"><h3>API / Platform Integrations</h3><p>Email, WhatsApp, Telegram, schedulers, and payment platforms.</p></div>
+        <div class="skill"><h3>BI Analysis</h3><p>MoM / QoQ / YoY, breakdowns, points tracking, charted briefs.</p></div>
+        <div class="skill"><h3>Dashboard &amp; Front-End Presentation</h3><p>Agent output as a clean, one-click page — including this one.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding-top:8px" aria-labelledby="contact-title">
+    <div class="wrap closing">
+      <div class="panel pad">
+        <h3>For employers</h3>
+        <h2 id="contact-title" style="font-family:'Newsreader',Georgia,serif;font-size:28px;line-height:1.15;margin:0 0 10px;letter-spacing:-.01em;font-weight:600">Production, not prototypes.</h2>
+        <p>These agents run on schedules against real accounts and inboxes — scoped narrow, wired into where the data lives, and silent until they have something worth saying.</p>
+      </div>
+      <div class="panel pad">
+        <h3>Contact &amp; links</h3>
+        <div class="contact-list">
+          <div class="contact-item"><span>Résumé PDF</span><b>To be added</b></div>
+          <div class="contact-item"><span>LinkedIn</span><a href="https://linkedin.com/in/kongjames" target="_blank" rel="noopener" style="font-weight:800;text-decoration:none">linkedin.com/in/kongjames ↗</a></div>
+          <div class="contact-item"><span>Email</span><a href="mailto:kong.jameskh@gmail.com" style="font-weight:800;text-decoration:none">kong.jameskh@gmail.com</a></div>
+          <div class="contact-item"><span>Sentinel agents</span><b>8 live — see above</b></div>
+        </div>
+        <p style="margin-top:14px;font-size:13.5px;color:var(--muted)">No live personal data is published here — sample outputs only.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-line">
+    <span>© 2026 James Kong — AI Systems &amp; Data Portfolio</span>
+    <span>Smart Money Dashboard — separate project</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var buttons = document.querySelectorAll('#projectFilters .filter');
+  var sections = document.querySelectorAll('[data-ecosystem-section]');
+  function apply(filter){
+    sections.forEach(function(sec){
+      var show = filter === 'all' || sec.getAttribute('data-ecosystem-section') === filter;
+      sec.classList.toggle('hidden', !show);
+    });
+    buttons.forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-filter') === filter ? 'true' : 'false');
+    });
+  }
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.getAttribute('data-filter')); });
+  });
+})();
+</script>
+</body>
+</html>
