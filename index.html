@@ -183,6 +183,17 @@
   }
   @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} .card-details summary .chev{transition:none} }
 </style>
+<!-- Google Analytics 4 (Portfolio property) — added 2026-10-16. Do NOT remove on rebuild; see GA4_PLAN.md -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PFDG92CHBX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent','default',{'ad_storage':'denied','analytics_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','region':['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','GB','CH','NO','IS','LI']});
+  gtag('consent','default',{'ad_storage':'granted','analytics_storage':'granted'});
+  gtag('js', new Date());
+  gtag('config', 'G-PFDG92CHBX');
+  function track(ev, params){ try{ gtag('event', ev, params||{}); }catch(e){} }
+</script>
 </head>
 <body>
 <header class="nav">
@@ -225,7 +236,7 @@
           <span>Schedule</span><i>→</i><span>Scan &amp; Compare</span><i>→</i><span>Change?</span><i>→</i><span>Act / Analyse</span><i>→</i><span>Phone</span>
         </div>
       </div>
-      <div class="panel stats" aria-label="Proof at a glance">
+      <div class="panel stats" data-section="proof_strip" aria-label="Proof at a glance">
         <div class="stat"><strong>13</strong><span>Production AI agents, live</span></div>
         <div class="stat"><strong>2</strong><span>Ecosystems: Telegram + WhatsApp</span></div>
         <div class="stat"><strong>4</strong><span>Cadences: daily · weekly · monthly · quarterly</span></div>
@@ -235,7 +246,7 @@
   </div>
 
   <!-- PRODUCT TEASER -->
-  <section class="teaser-wrap" id="product" aria-labelledby="teaser-title">
+  <section class="teaser-wrap" id="product" data-section="smd_teaser" aria-labelledby="teaser-title">
     <div class="wrap">
       <article class="teaser">
         <div>
@@ -259,7 +270,7 @@
   </div>
 
   <!-- WHATSAPP FLEET -->
-  <section id="fleet" data-ecosystem-section="whatsapp" aria-labelledby="fleet-title">
+  <section id="fleet" data-section="whatsapp_fleet" data-ecosystem-section="whatsapp" aria-labelledby="fleet-title">
     <div class="wrap">
       <div class="sec-head">
         <div class="kicker">WhatsApp · Live in production</div>
@@ -384,7 +395,7 @@
 
   <!-- TELEGRAM / SENTINEL -->
   <div class="telegram-wrap" data-ecosystem-section="telegram">
-    <section id="telegram" aria-labelledby="telegram-title">
+    <section id="telegram" data-section="sentinel_agents" aria-labelledby="telegram-title">
       <div class="wrap">
         <div class="sec-head">
           <div class="kicker">Telegram · Sentinel — Feb 2026–present</div>
@@ -531,7 +542,7 @@ Engagement: 12× average</div>
     </section>
   </div>
 
-  <section id="build" style="padding-top:28px;padding-bottom:2px" aria-labelledby="build-title">
+  <section id="build" data-section="build_pattern" style="padding-top:28px;padding-bottom:2px" aria-labelledby="build-title">
     <div class="wrap">
       <div class="sec-head" style="margin-bottom:4px">
         <div class="kicker">The build pattern</div>
@@ -546,7 +557,7 @@ Engagement: 12× average</div>
     </div>
   </section>
 
-  <section id="skills" aria-labelledby="skills-title">
+  <section id="skills" data-section="skills" aria-labelledby="skills-title">
     <div class="wrap">
       <div class="sec-head">
         <div class="kicker">Capabilities</div>
@@ -564,7 +575,7 @@ Engagement: 12× average</div>
     </div>
   </section>
 
-  <section id="contact" style="padding-top:8px" aria-labelledby="contact-title">
+  <section id="contact" data-section="contact" style="padding-top:8px" aria-labelledby="contact-title">
     <div class="wrap closing">
       <div class="panel pad">
         <h3>For employers</h3>
@@ -584,7 +595,7 @@ Engagement: 12× average</div>
   </section>
   </div><!-- /tab-agents -->
 
-  <div id="tab-smd" role="tabpanel" aria-labelledby="tab-btn-smd" class="hidden">
+  <div id="tab-smd" data-section="smd_tab" role="tabpanel" aria-labelledby="tab-btn-smd" class="hidden">
     <section class="product-wrap" aria-labelledby="smd-title">
       <div class="wrap">
         <article class="product">
@@ -650,6 +661,7 @@ Engagement: 12× average</div>
   var agentsPanel = document.getElementById('tab-agents');
   var smdPanel = document.getElementById('tab-smd');
   function showPage(name){
+    track('tab_switch',{tab:name});
     var isAgents = name === 'agents';
     agentsPanel.classList.toggle('hidden', !isAgents);
     smdPanel.classList.toggle('hidden', isAgents);
@@ -657,12 +669,13 @@ Engagement: 12× average</div>
     window.scrollTo({top:0, behavior:'smooth'});
   }
   pageTabs.forEach(function(t){ t.addEventListener('click', function(){ showPage(t.getAttribute('data-page-tab')); }); });
-  document.querySelectorAll('[data-goto-smd]').forEach(function(b){ b.addEventListener('click', function(){ showPage('smd'); }); });
+  document.querySelectorAll('[data-goto-smd]').forEach(function(b){ b.addEventListener('click', function(){ track('cta_click',{cta_id:'explore_smd'}); showPage('smd'); }); });
   document.querySelectorAll('.nav-links a').forEach(function(a){ a.addEventListener('click', function(){ showPage('agents'); }); });
 
   var buttons = document.querySelectorAll('#projectFilters .filter');
   var sections = document.querySelectorAll('[data-ecosystem-section]');
   function apply(filter){
+    track('project_filter',{filter:filter});
     sections.forEach(function(sec){
       var show = filter === 'all' || sec.getAttribute('data-ecosystem-section') === filter;
       sec.classList.toggle('hidden', !show);
@@ -675,6 +688,57 @@ Engagement: 12× average</div>
     b.addEventListener('click', function(){ apply(b.getAttribute('data-filter')); });
   });
 })();
+</script>
+<script>
+  // --- GA4 custom instrumentation (2026-10-16) ---
+  document.querySelectorAll('details').forEach(function(d){
+    d.addEventListener('toggle', function(){
+      if(!d.open) return;
+      var card = d.closest('.agent'); var name = card ? (card.querySelector('h3')||{}).textContent : 'unknown';
+      track('card_details_open', {agent_name: (name||'').trim()});
+    });
+  });
+  document.querySelectorAll('a[href]').forEach(function(a){
+    a.addEventListener('click', function(){
+      var h = a.getAttribute('href')||'';
+      if(h.indexOf('linkedin.com')>-1) track('cta_click',{cta_id:'linkedin'});
+      else if(h.indexOf('mailto:')===0) track('cta_click',{cta_id:'email'});
+      else if(h.indexOf('polygonsolutions.app')>-1) track('cta_click',{cta_id:'smd_open_dashboard'});
+    });
+  });
+  // Section view + dwell (avg time per section)
+  var seen = {}, dwellStart = {}, dwellTotal = {};
+  function bucket(ms){ if(ms<3000) return '<3s'; if(ms<10000) return '3-10s'; if(ms<30000) return '10-30s'; if(ms<60000) return '30-60s'; return '60s+'; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var id = e.target.getAttribute('data-section'); if(!id) return;
+      if(e.intersectionRatio >= 0.5){
+        if(!seen[id]){ seen[id]=1; track('section_view',{section_id:id}); }
+        if(!dwellStart[id]) dwellStart[id] = Date.now();
+      } else if(dwellStart[id]){
+        dwellTotal[id] = (dwellTotal[id]||0) + (Date.now()-dwellStart[id]); delete dwellStart[id];
+      }
+    });
+  }, {threshold:[0.5]});
+  document.querySelectorAll('[data-section]').forEach(function(el){ io.observe(el); });
+  function flushDwell(){
+    var now = Date.now();
+    Object.keys(dwellStart).forEach(function(id){ dwellTotal[id]=(dwellTotal[id]||0)+(now-dwellStart[id]); });
+    dwellStart = {};
+    Object.keys(dwellTotal).forEach(function(id){
+      if(dwellTotal[id]>=1000) track('section_dwell',{section_id:id, dwell_ms: dwellTotal[id], dwell_bucket: bucket(dwellTotal[id])});
+    });
+    dwellTotal = {};
+  }
+  document.addEventListener('visibilitychange', function(){ if(document.visibilityState==='hidden') flushDwell(); });
+  window.addEventListener('pagehide', flushDwell);
+  // Scroll depth milestones
+  var fired = {};
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement;
+    var pct = Math.round(100 * (h.scrollTop + h.clientHeight) / h.scrollHeight);
+    [25,50,75,90,100].forEach(function(m){ if(pct>=m && !fired[m]){ fired[m]=1; track('scroll_depth',{percent:m}); } });
+  }, {passive:true});
 </script>
 </body>
 </html>
