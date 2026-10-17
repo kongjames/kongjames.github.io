@@ -251,7 +251,7 @@
           <span>Schedule</span><i>→</i><span>Scan &amp; Compare</span><i>→</i><span>Change?</span><i>→</i><span>Act / Analyse</span><i>→</i><span>Phone</span>
         </div>
       </div>
-      <div class="panel stats" aria-label="Proof at a glance">
+      <div class="panel stats" data-section="proof_strip" aria-label="Proof at a glance">
         <div class="stat"><strong>13</strong><span>Production AI agents, live</span></div>
         <div class="stat"><strong>2</strong><span>Ecosystems: Telegram + WhatsApp</span></div>
         <div class="stat"><strong>4</strong><span>Cadences: daily · weekly · monthly · quarterly</span></div>
@@ -261,7 +261,7 @@
   </div>
 
   <!-- PRODUCT TEASER -->
-  <section class="teaser-wrap" id="product" aria-labelledby="teaser-title">
+  <section class="teaser-wrap" id="product" data-section="smd_teaser" aria-labelledby="teaser-title">
     <div class="wrap">
       <article class="teaser">
         <div>
@@ -285,7 +285,7 @@
   </div>
 
   <!-- WHATSAPP FLEET -->
-  <section id="fleet" data-ecosystem-section="whatsapp" aria-labelledby="fleet-title">
+  <section id="fleet" data-section="whatsapp_fleet" data-ecosystem-section="whatsapp" aria-labelledby="fleet-title">
     <div class="wrap">
       <div class="sec-head">
         <div class="kicker">WhatsApp · Live in production</div>
@@ -410,7 +410,7 @@
 
   <!-- TELEGRAM / SENTINEL -->
   <div class="telegram-wrap" data-ecosystem-section="telegram">
-    <section id="telegram" aria-labelledby="telegram-title">
+    <section id="telegram" data-section="sentinel_agents" aria-labelledby="telegram-title">
       <div class="wrap">
         <div class="sec-head">
           <div class="kicker">Telegram · Sentinel — Feb 2026–present</div>
@@ -557,7 +557,7 @@ Engagement: 12× average</div>
     </section>
   </div>
 
-  <section id="build" style="padding-top:28px;padding-bottom:2px" aria-labelledby="build-title">
+  <section id="build" data-section="build_pattern" style="padding-top:28px;padding-bottom:2px" aria-labelledby="build-title">
     <div class="wrap">
       <div class="sec-head" style="margin-bottom:4px">
         <div class="kicker">The build pattern</div>
@@ -572,7 +572,7 @@ Engagement: 12× average</div>
     </div>
   </section>
 
-  <section id="skills" aria-labelledby="skills-title">
+  <section id="skills" data-section="skills" aria-labelledby="skills-title">
     <div class="wrap">
       <div class="sec-head">
         <div class="kicker">Capabilities</div>
@@ -590,7 +590,7 @@ Engagement: 12× average</div>
     </div>
   </section>
 
-  <section id="contact" style="padding-top:8px" aria-labelledby="contact-title">
+  <section id="contact" data-section="contact" style="padding-top:8px" aria-labelledby="contact-title">
     <div class="wrap closing">
       <div class="panel pad">
         <h3>For employers</h3>
@@ -610,7 +610,7 @@ Engagement: 12× average</div>
   </section>
   </div><!-- /tab-agents -->
 
-  <div id="tab-smd" role="tabpanel" aria-labelledby="tab-btn-smd" class="hidden">
+  <div id="tab-smd" role="tabpanel" aria-labelledby="tab-btn-smd" class="hidden" data-section="smd_tab">
     <section class="product-wrap" aria-labelledby="smd-title">
       <div class="wrap">
         <article class="product">
@@ -708,6 +708,24 @@ Engagement: 12× average</div>
 </script>
 <script>
 (function(){
+  /* GA CONTRACT — read before adding sections
+     This script is the ONLY tracking wiring for this page. Keep it that way.
+     (a) New section → add data-section="snake_case_name" to the section's
+         element in the markup. Nothing else is needed — section_view and
+         section_dwell pick it up automatically.
+     (b) New tab → use data-page-tab on the button (fires tab_switch).
+         New filter chip → a .filter button inside #projectFilters (fires
+         project_filter). New agent card → a details.card-details (fires
+         card_details_open on open only). New CTA → a normal anchor is
+         auto-classified by href (linkedin / email / polygonsolutions.app);
+         for the teaser pattern use data-goto-smd (fires explore_smd).
+     (c) NEVER add a second tracking script, and never copy a listener from
+         here into another block. One click must produce exactly one event.
+         The __gaPortfolioWired guard below enforces this even if this
+         script block itself is ever duplicated in a future edit. */
+  if (window.__gaPortfolioWired) return;
+  window.__gaPortfolioWired = true;
+
   function track(name, params){
     if (typeof window.gtag === 'function') { window.gtag('event', name, params || {}); }
   }
@@ -748,15 +766,9 @@ Engagement: 12× average</div>
     if (cta) a.addEventListener('click', function(){ track('cta_click', { cta: cta }); });
   });
 
-  /* section_view + section_dwell */
-  var sectionDefs = [
-    { name: 'proof_strip', el: document.querySelector('.panel.stats') },
-    { name: 'smd_teaser', el: document.getElementById('product') },
-    { name: 'whatsapp_fleet', el: document.getElementById('fleet') },
-    { name: 'sentinel_agents', el: document.getElementById('telegram') },
-    { name: 'smd_tab', el: document.getElementById('tab-smd') },
-    { name: 'contact', el: document.getElementById('contact') }
-  ].filter(function(s){ return !!s.el; });
+  /* section_view + section_dwell — auto-discovered: every element carrying
+     a data-section attribute is observed; the attribute value is the
+     section name. Adding a tracked section needs no script change. */
   var visibleSince = {};
   function endDwell(name){
     if (!visibleSince[name]) return;
@@ -767,7 +779,7 @@ Engagement: 12× average</div>
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
-        var name = en.target.getAttribute('data-ga-section');
+        var name = en.target.getAttribute('data-section');
         if (!name) return;
         if (en.isIntersecting) {
           track('section_view', { section: name });
@@ -777,9 +789,8 @@ Engagement: 12× average</div>
         }
       });
     }, { threshold: 0.1 });
-    sectionDefs.forEach(function(s){
-      s.el.setAttribute('data-ga-section', s.name);
-      io.observe(s.el);
+    document.querySelectorAll('[data-section]').forEach(function(el){
+      io.observe(el);
     });
     document.addEventListener('visibilitychange', function(){
       if (document.visibilityState === 'hidden') {
