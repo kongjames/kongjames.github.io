@@ -708,68 +708,81 @@ Engagement: 12× average</div>
 </script>
 <script>
 (function(){
-  /* GA CONTRACT — read before adding sections
-     This script is the ONLY tracking wiring for this page. Keep it that way.
-     (a) New section → add data-section="snake_case_name" to the section's
-         element in the markup. Nothing else is needed — section_view and
-         section_dwell pick it up automatically.
-     (b) New tab → use data-page-tab on the button (fires tab_switch).
-         New filter chip → a .filter button inside #projectFilters (fires
-         project_filter). New agent card → a details.card-details (fires
-         card_details_open on open only). New CTA → a normal anchor is
-         auto-classified by href (linkedin / email / polygonsolutions.app);
-         for the teaser pattern use data-goto-smd (fires explore_smd).
-     (c) NEVER add a second tracking script, and never copy a listener from
-         here into another block. One click must produce exactly one event.
-         The __gaPortfolioWired guard below enforces this even if this
-         script block itself is ever duplicated in a future edit. */
+  /* GA CONTRACT v2 (2026-10-16) — read before editing this page.
+     ONE delegated click listener below sends EXACTLY ONE GA4 event for EVERY
+     click on a link, button, tab, filter chip or Details toggle, including
+     elements added in the future. No per-element listeners, no second script.
+     Full spec for GA4 setup (events, parameters, custom dimensions):
+     portfolio/GA4_TRACKING_SPEC.md
+
+     Adding content — what you get with NO script change:
+       new section / tab panel  → add data-section="snake_case" (section_view,
+                                   section_dwell). A <section id="x"> without
+                                   one is still tracked as section "x".
+       new page tab             → button with data-page-tab="name"  (tab_switch)
+       new filter chip          → button with data-filter="name"    (project_filter)
+       new agent card           → details.card-details inside .agent with an h3
+                                   (card_details_open / card_details_close)
+       new in-page link (#id)   → nav_click
+       new external link        → outbound_click (LinkedIn / email / dashboard
+                                   stay cta_click)
+       any other button         → ui_click
+     Naming a click explicitly (optional, wins over all rules above):
+       data-ga-event="event_name"  data-ga-label="what_it_is"
+     Every event also carries: section (nearest data-section), page_tab
+     (current tab), label (data-ga-label or the element's text). */
   if (window.__gaPortfolioWired) return;
   window.__gaPortfolioWired = true;
 
   function track(name, params){
     if (typeof window.gtag === 'function') { window.gtag('event', name, params || {}); }
   }
+  function text(el){ return (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80); }
+  function sectionOf(el){
+    var s = el.closest('[data-section]') || el.closest('section[id]');
+    return s ? (s.getAttribute('data-section') || s.id) : 'page';
+  }
+  function currentTab(){
+    var t = document.querySelector('[data-page-tab][aria-selected="true"]');
+    return t ? t.getAttribute('data-page-tab') : 'none';
+  }
 
-  /* tab_switch */
-  document.querySelectorAll('[data-page-tab]').forEach(function(t){
-    t.addEventListener('click', function(){ track('tab_switch', { tab: t.getAttribute('data-page-tab') }); });
-  });
+  /* ---- clicks: one listener, one event per click ---- */
+  var CLICKABLE = '[data-ga-event],[data-page-tab],[data-filter],summary,[data-goto-smd],a[href],button,[role="button"]';
+  document.addEventListener('click', function(e){
+    var el = e.target.closest(CLICKABLE);
+    if (!el) return;
+    var p = { section: sectionOf(el), page_tab: currentTab(), label: el.getAttribute('data-ga-label') || text(el) };
+    var name;
+    var href = el.getAttribute('href') || '';
+    if (el.hasAttribute('data-ga-event')) {
+      name = el.getAttribute('data-ga-event');
+    } else if (el.hasAttribute('data-page-tab')) {
+      name = 'tab_switch'; p.tab = el.getAttribute('data-page-tab');
+    } else if (el.hasAttribute('data-filter')) {
+      name = 'project_filter'; p.filter = el.getAttribute('data-filter');
+    } else if (el.tagName === 'SUMMARY') {
+      var d = el.parentElement;
+      var card = el.closest('.agent');
+      var h = card ? card.querySelector('h3') : null;
+      p.agent_name = h ? text(h) : '';
+      name = (d && d.open) ? 'card_details_close' : 'card_details_open';   /* state before the toggle */
+    } else if (el.hasAttribute('data-goto-smd')) {
+      name = 'cta_click'; p.cta = 'explore_smd';
+    } else if (href) {
+      if (href.indexOf('linkedin.com') !== -1)            { name = 'cta_click'; p.cta = 'linkedin'; }
+      else if (href.indexOf('mailto:') === 0)            { name = 'cta_click'; p.cta = 'email'; }
+      else if (href.indexOf('polygonsolutions.app') !== -1) { name = 'cta_click'; p.cta = 'smd_open_dashboard'; }
+      else if (href.charAt(0) === '#')                   { name = 'nav_click'; p.target = href.slice(1) || 'top'; }
+      else                                               { name = 'outbound_click'; p.url = href; }
+    } else {
+      name = 'ui_click';
+    }
+    track(name, p);
+  }, true);
 
-  /* project_filter */
-  document.querySelectorAll('#projectFilters .filter').forEach(function(b){
-    b.addEventListener('click', function(){ track('project_filter', { filter: b.getAttribute('data-filter') }); });
-  });
-
-  /* card_details_open */
-  document.querySelectorAll('details.card-details').forEach(function(d){
-    d.addEventListener('toggle', function(){
-      if (!d.open) return;
-      var card = d.closest('.agent');
-      var title = card ? card.querySelector('h3') : null;
-      track('card_details_open', { agent_name: title ? title.textContent.trim() : '' });
-    });
-  });
-
-  /* cta_click */
-  document.querySelectorAll('[data-goto-smd]').forEach(function(b){
-    b.addEventListener('click', function(){
-      track('cta_click', { cta: 'explore_smd' });
-      track('tab_switch', { tab: 'smd' });
-    });
-  });
-  document.querySelectorAll('a[href]').forEach(function(a){
-    var href = a.getAttribute('href') || '';
-    var cta = null;
-    if (href.indexOf('linkedin.com') !== -1) cta = 'linkedin';
-    else if (href.indexOf('mailto:') === 0) cta = 'email';
-    else if (href.indexOf('polygonsolutions.app') !== -1) cta = 'smd_open_dashboard';
-    if (cta) a.addEventListener('click', function(){ track('cta_click', { cta: cta }); });
-  });
-
-  /* section_view + section_dwell — auto-discovered: every element carrying
-     a data-section attribute is observed; the attribute value is the
-     section name. Adding a tracked section needs no script change. */
-  var visibleSince = {};
+  /* ---- section_view (once per section per page load) + section_dwell ---- */
+  var seen = {}, visibleSince = {};
   function endDwell(name){
     if (!visibleSince[name]) return;
     var secs = Math.round((Date.now() - visibleSince[name]) / 1000);
@@ -779,30 +792,34 @@ Engagement: 12× average</div>
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
-        var name = en.target.getAttribute('data-section');
+        var name = en.target.getAttribute('data-section') || en.target.id;
         if (!name) return;
         if (en.isIntersecting) {
-          track('section_view', { section: name });
-          visibleSince[name] = Date.now();
+          if (!seen[name]) { seen[name] = 1; track('section_view', { section: name }); }
+          if (!visibleSince[name]) visibleSince[name] = Date.now();
         } else {
           endDwell(name);
         }
       });
     }, { threshold: 0.1 });
-    document.querySelectorAll('[data-section]').forEach(function(el){
-      io.observe(el);
-    });
+    var observed = [];
+    function watch(el){
+      if (observed.indexOf(el) !== -1) return;
+      if (!el.hasAttribute('data-section') && el.parentElement && el.parentElement.closest('[data-section]')) return; /* inner section of a tracked block */
+      observed.push(el); io.observe(el);
+    }
+    function scan(){ document.querySelectorAll('[data-section], section[id]').forEach(watch); }
+    scan();
+    if ('MutationObserver' in window) new MutationObserver(scan).observe(document.body, { childList: true, subtree: true }); /* sections added later */
+    function flushAll(){ Object.keys(visibleSince).forEach(endDwell); }
     document.addEventListener('visibilitychange', function(){
-      if (document.visibilityState === 'hidden') {
-        Object.keys(visibleSince).forEach(endDwell);
-      }
+      if (document.visibilityState === 'hidden') flushAll();
+      else observed.forEach(function(el){ io.unobserve(el); io.observe(el); });   /* restart timers for what is on screen */
     });
-    window.addEventListener('pagehide', function(){
-      Object.keys(visibleSince).forEach(endDwell);
-    });
+    window.addEventListener('pagehide', flushAll);
   }
 
-  /* scroll_depth — once each at 25 / 50 / 75 / 90 / 100% */
+  /* ---- scroll_depth: once each at 25 / 50 / 75 / 90 / 100% ---- */
   var thresholds = [25, 50, 75, 90, 100];
   var fired = {};
   var ticking = false;
@@ -812,10 +829,7 @@ Engagement: 12× average</div>
     var total = doc.scrollHeight - window.innerHeight;
     var pct = total > 0 ? Math.min(100, Math.round(((window.scrollY || doc.scrollTop) / total) * 100)) : 100;
     thresholds.forEach(function(t){
-      if (pct >= t && !fired[t]) {
-        fired[t] = true;
-        track('scroll_depth', { percent: t });
-      }
+      if (pct >= t && !fired[t]) { fired[t] = true; track('scroll_depth', { percent: t }); }
     });
   }
   window.addEventListener('scroll', function(){
