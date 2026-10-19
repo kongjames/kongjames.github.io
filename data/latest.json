@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-10-19T04:06+00:00",
+  "agents": {
+    "fed": {
+      "text": "At Any Rate (JPM) · Global Rates: DM inflation markets under higher real rates\nComposite +0.75 · Leaning Hawkish\n101 episodes scored to date",
+      "ts": "2026-09-27T19:00+00:00",
+      "cadence_hours": 168
+    },
+    "sentiment": {
+      "text": "Signal NEUTRAL (LOW confidence)\nDivergence -0.0959 · retail 0.514 vs institutional 0.610\nVIX 15.82 · Fear & Greed 32 · 40 headlines scored with FinBERT · 6 sources OK",
+      "ts": "2026-10-16T19:00+00:00",
+      "cadence_hours": 72
+    },
+    "investors": {
+      "text": "Situational Awareness LP · Q2 2026 13F · 23 stock positions · top SNDK 28.1%, MU 27.6%, BE 9.4%\nBerkshire Hathaway · Q2 2026 13F · 29 stock positions · top AAPL 22.0%, AXP 17.1%, KO 10.9%",
+      "ts": "2026-10-19T03:00+00:00",
+      "cadence_hours": 24
+    },
+    "xmarket": {
+      "text": "🚨 HIGH · @michaeljburry · EVS 38.6\nLatest alert Oct 17, 08:31 · 175 alerts sent since Apr 2026",
+      "ts": "2026-10-19T04:01+00:00",
+      "cadence_hours": 1
+    },
+    "predict": {
+      "text": "Macro: Leaning Hawkish\n🟢 BUY: CRWV (+2), BE (+2)\n🟡 WATCH: EQT (+1), CORZ (+1), IREN (+1), CIFR (+1), COHR (+1), LITE (+1), MSFT (+1), GOOGL (+1), AMZN (+1)\n⚪ HOLD: NVDA (+0)\n144 picks logged since Jul 2026, each scored vs SPY",
+      "ts": "2026-10-12T19:00+00:00",
+      "cadence_hours": 168
+    },
+    "pelosi": {
+      "text": "Latest PTR #20035553 · 1/1 trades parsed\n60-day window 2026-08-06 to 2026-10-05 · 8 trades charted · complete",
+      "ts": "2026-10-19T01:15+00:00",
+      "cadence_hours": 12
+    }
+  }
+}
