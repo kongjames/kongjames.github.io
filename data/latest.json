@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T02:30+00:00",
+  "generated_at": "2026-10-21T14:30+00:00",
   "agents": {
     "fed": {
       "text": "At Any Rate (JPM) · Global Rates: DM inflation markets under higher real rates\nComposite +0.75 · Leaning Hawkish\n101 episodes scored to date",
@@ -7,18 +7,18 @@
       "cadence_hours": 168
     },
     "sentiment": {
-      "text": "Signal NEUTRAL (LOW confidence)\nDivergence -0.1625 · retail 0.422 vs institutional 0.585\nVIX 18.67 · Fear & Greed 21 · 31 headlines scored with FinBERT · 6 sources OK",
-      "ts": "2026-10-20T19:00+00:00",
+      "text": "Signal NEUTRAL (LOW confidence)\nDivergence -0.1189 · retail 0.510 vs institutional 0.629\nVIX 17.0 · Fear & Greed 31 · 36 headlines scored with FinBERT · 6 sources OK",
+      "ts": "2026-10-21T19:00+00:00",
       "cadence_hours": 72
     },
     "investors": {
       "text": "Situational Awareness LP · Q2 2026 13F · 23 stock positions · top SNDK 28.1%, MU 27.6%, BE 9.4%\nBerkshire Hathaway · Q2 2026 13F · 29 stock positions · top AAPL 22.0%, AXP 17.1%, KO 10.9%",
-      "ts": "2026-10-21T00:05+00:00",
+      "ts": "2026-10-21T13:05+00:00",
       "cadence_hours": 24
     },
     "xmarket": {
       "text": "🚨 HIGH · @michaeljburry · EVS 11.6\nLatest alert Oct 19, 06:31 · 176 alerts sent since Apr 2026",
-      "ts": "2026-10-21T02:21+00:00",
+      "ts": "2026-10-21T14:21+00:00",
       "cadence_hours": 24
     },
     "predict": {
@@ -28,7 +28,7 @@
     },
     "pelosi": {
       "text": "Latest PTR #20035553 · 1/1 trades parsed\n60-day window 2026-08-06 to 2026-10-05 · 8 trades charted · complete",
-      "ts": "2026-10-21T01:15+00:00",
+      "ts": "2026-10-21T13:15+00:00",
       "cadence_hours": 24
     }
   }
