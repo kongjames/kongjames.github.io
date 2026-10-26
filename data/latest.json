@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T02:30+00:00",
+  "generated_at": "2026-10-26T14:30+00:00",
   "agents": {
     "fed": {
       "text": "At Any Rate (JPM) · Global Rates: DM inflation markets under higher real rates\nComposite +0.75 · Leaning Hawkish\n101 episodes scored to date",
@@ -7,28 +7,28 @@
       "cadence_hours": 168
     },
     "sentiment": {
-      "text": "Signal NEUTRAL (LOW confidence)\nDivergence -0.1817 · retail 0.388 vs institutional 0.569\nVIX 20.16 · Fear & Greed 20 · 43 headlines scored with FinBERT · 6 sources OK",
-      "ts": "2026-10-23T19:00+00:00",
+      "text": "Signal NEUTRAL (LOW confidence)\nDivergence -0.1949 · retail 0.395 vs institutional 0.590\nVIX 19.02 · Fear & Greed 22 · 42 headlines scored with FinBERT · 6 sources OK",
+      "ts": "2026-10-26T19:00+00:00",
       "cadence_hours": 72
     },
     "investors": {
       "text": "Situational Awareness LP · Q2 2026 13F · 23 stock positions · top SNDK 28.1%, MU 27.6%, BE 9.4%\nBerkshire Hathaway · Q2 2026 13F · 29 stock positions · top AAPL 22.0%, AXP 17.1%, KO 10.9%",
-      "ts": "2026-10-26T00:05+00:00",
+      "ts": "2026-10-26T13:05+00:00",
       "cadence_hours": 24
     },
     "xmarket": {
       "text": "🚨 HIGH · @michaeljburry · EVS 11.6\nLatest alert Oct 19, 06:31 · 176 alerts sent since Apr 2026",
-      "ts": "2026-10-26T02:21+00:00",
+      "ts": "2026-10-26T14:21+00:00",
       "cadence_hours": 24
     },
     "predict": {
-      "text": "Macro: Leaning Hawkish\n🟢 BUY: CRWV (+2), BE (+2)\n🟡 WATCH: EQT (+1), CORZ (+1), IREN (+1), CIFR (+1), COHR (+1), LITE (+1), MSFT (+1), GOOGL (+1), AMZN (+1)\n⚪ HOLD: NVDA (+0)\n156 picks logged since Jul 2026, each scored vs SPY",
-      "ts": "2026-10-19T19:00+00:00",
+      "text": "Macro: Leaning Hawkish\n🟢 BUY: CRWV (+2), BE (+2)\n🟡 WATCH: EQT (+1), CORZ (+1), IREN (+1), CIFR (+1), COHR (+1), LITE (+1), MSFT (+1), GOOGL (+1), AMZN (+1)\n⚪ HOLD: NVDA (+0)\n168 picks logged since Jul 2026, each scored vs SPY",
+      "ts": "2026-10-26T19:00+00:00",
       "cadence_hours": 168
     },
     "pelosi": {
       "text": "Latest PTR #20035553 · 1/1 trades parsed\n60-day window 2026-08-06 to 2026-10-05 · 8 trades charted · complete",
-      "ts": "2026-10-26T01:15+00:00",
+      "ts": "2026-10-26T13:15+00:00",
       "cadence_hours": 24
     }
   }
