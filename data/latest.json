@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-27T14:30+00:00",
+  "generated_at": "2026-10-28T02:30+00:00",
   "agents": {
     "fed": {
       "text": "At Any Rate (JPM) · Global Rates: DM inflation markets under higher real rates\nComposite +0.75 · Leaning Hawkish\n101 episodes scored to date",
@@ -13,12 +13,12 @@
     },
     "investors": {
       "text": "Situational Awareness LP · Q2 2026 13F · 23 stock positions · top SNDK 28.1%, MU 27.6%, BE 9.4%\nBerkshire Hathaway · Q2 2026 13F · 29 stock positions · top AAPL 22.0%, AXP 17.1%, KO 10.9%",
-      "ts": "2026-10-27T13:05+00:00",
+      "ts": "2026-10-28T00:05+00:00",
       "cadence_hours": 24
     },
     "xmarket": {
       "text": "🚨 HIGH · @CathieDWood · $SPCX,TSLA · EVS 3.2\nLatest alert Oct 26, 11:21 · 178 alerts sent since Apr 2026",
-      "ts": "2026-10-27T14:21+00:00",
+      "ts": "2026-10-28T02:21+00:00",
       "cadence_hours": 24
     },
     "predict": {
@@ -28,7 +28,7 @@
     },
     "pelosi": {
       "text": "Latest PTR #20035553 · 1/1 trades parsed\n60-day window 2026-08-06 to 2026-10-05 · 8 trades charted · complete",
-      "ts": "2026-10-27T13:15+00:00",
+      "ts": "2026-10-28T01:15+00:00",
       "cadence_hours": 24
     }
   }
