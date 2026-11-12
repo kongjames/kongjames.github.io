@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T03:30+00:00",
+  "generated_at": "2026-11-12T15:30+00:00",
   "agents": {
     "fed": {
       "text": "At Any Rate (JPM) · Global Rates: DM inflation markets under higher real rates\nComposite +0.75 · Leaning Hawkish\n101 episodes scored to date",
@@ -7,18 +7,18 @@
       "cadence_hours": 168
     },
     "sentiment": {
-      "text": "Signal NEUTRAL (LOW confidence)\nDivergence -0.3117 · retail 0.316 vs institutional 0.628\nVIX 18.31 · Fear & Greed 36 · 47 headlines scored with FinBERT · 6 sources OK",
-      "ts": "2026-11-11T19:00+00:00",
+      "text": "Signal NEUTRAL (LOW confidence)\nDivergence -0.2319 · retail 0.306 vs institutional 0.538\nVIX 18.82 · Fear & Greed 35 · 33 headlines scored with FinBERT · 6 sources OK",
+      "ts": "2026-11-12T19:00+00:00",
       "cadence_hours": 72
     },
     "investors": {
       "text": "Situational Awareness LP · Q2 2026 13F · 23 stock positions · top SNDK 28.1%, MU 27.6%, BE 9.4%\nBerkshire Hathaway · Q2 2026 13F · 29 stock positions · top AAPL 22.0%, AXP 17.1%, KO 10.9%",
-      "ts": "2026-11-12T01:05+00:00",
+      "ts": "2026-11-12T14:05+00:00",
       "cadence_hours": 24
     },
     "xmarket": {
-      "text": "🚨 CRITICAL · @pelositracker · $NVDA,SPY · EVS 3.9\nLatest alert Nov 11, 14:13 · 182 alerts sent since Apr 2026",
-      "ts": "2026-11-12T03:23+00:00",
+      "text": "🚨 HIGH · @michaeljburry · $NVDA · EVS 3.1\nLatest alert Nov 12, 07:23 · 184 alerts sent since Apr 2026",
+      "ts": "2026-11-12T15:23+00:00",
       "cadence_hours": 24
     },
     "predict": {
@@ -28,7 +28,7 @@
     },
     "pelosi": {
       "text": "Latest PTR #20035780 · 1/1 trades parsed\n60-day window 2026-09-10 to 2026-11-09 · 2 trades charted · complete",
-      "ts": "2026-11-12T02:15+00:00",
+      "ts": "2026-11-12T14:15+00:00",
       "cadence_hours": 24
     }
   }
