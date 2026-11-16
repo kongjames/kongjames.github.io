@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T03:30+00:00",
+  "generated_at": "2026-11-16T15:30+00:00",
   "agents": {
     "fed": {
       "text": "At Any Rate (JPM) · Global Rates: DM inflation markets under higher real rates\nComposite +0.75 · Leaning Hawkish\n101 episodes scored to date",
@@ -7,28 +7,28 @@
       "cadence_hours": 168
     },
     "sentiment": {
-      "text": "Signal NEUTRAL (LOW confidence)\nDivergence -0.3024 · retail 0.279 vs institutional 0.581\nVIX 18.01 · Fear & Greed 41 · 49 headlines scored with FinBERT · 6 sources OK",
-      "ts": "2026-11-13T19:00+00:00",
+      "text": "Signal NEUTRAL (LOW confidence)\nDivergence -0.3869 · retail 0.205 vs institutional 0.592\nVIX 20.48 · Fear & Greed 38 · 37 headlines scored with FinBERT · 6 sources OK",
+      "ts": "2026-11-16T19:00+00:00",
       "cadence_hours": 72
     },
     "investors": {
       "text": "Situational Awareness LP · Q2 2026 13F · 23 stock positions · top SNDK 28.1%, MU 27.6%, BE 9.4%\nBerkshire Hathaway · Q2 2026 13F · 29 stock positions · top AAPL 22.0%, AXP 17.1%, KO 10.9%",
-      "ts": "2026-11-16T01:05+00:00",
+      "ts": "2026-11-16T14:05+00:00",
       "cadence_hours": 24
     },
     "xmarket": {
-      "text": "🚨 HIGH · @muddywatersre · $MSFT · EVS 4.5\nLatest alert Nov 13, 13:33 · 187 alerts sent since Apr 2026",
-      "ts": "2026-11-16T03:23+00:00",
+      "text": "🚨 HIGH · @michaeljburry · $NVDA · EVS 3.0\nLatest alert Nov 15, 19:33 · 188 alerts sent since Apr 2026",
+      "ts": "2026-11-16T15:23+00:00",
       "cadence_hours": 24
     },
     "predict": {
-      "text": "Macro: Leaning Hawkish\n🟢 BUY: BE (+2)\n🟡 WATCH: NVDA (+1), CRWV (+1), EQT (+1), CORZ (+1), IREN (+1), COHR (+1), LITE (+1), MSFT (+1), GOOGL (+1), AMZN (+1)\n⚪ HOLD: CIFR (+0)\n192 picks logged since Jul 2026, each scored vs SPY",
-      "ts": "2026-11-09T19:00+00:00",
+      "text": "Macro: Leaning Hawkish\n🟢 BUY: BE (+2), MSFT (+2)\n🟡 WATCH: NVDA (+1), CRWV (+1), EQT (+1), CORZ (+1), IREN (+1), COHR (+1), LITE (+1), GOOGL (+1)\n⚪ HOLD: CIFR (+0), AMZN (+0)\n204 picks logged since Jul 2026, each scored vs SPY",
+      "ts": "2026-11-16T19:00+00:00",
       "cadence_hours": 168
     },
     "pelosi": {
       "text": "Latest PTR #20035780 · 1/1 trades parsed\n60-day window 2026-09-10 to 2026-11-09 · 2 trades charted · complete",
-      "ts": "2026-11-16T02:15+00:00",
+      "ts": "2026-11-16T14:15+00:00",
       "cadence_hours": 24
     }
   }
