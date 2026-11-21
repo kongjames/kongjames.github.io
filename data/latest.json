@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T15:30+00:00",
+  "generated_at": "2026-11-21T03:30+00:00",
   "agents": {
     "fed": {
       "text": "At Any Rate (JPM) · Global Rates: DM inflation markets under higher real rates\nComposite +0.75 · Leaning Hawkish\n101 episodes scored to date",
@@ -13,12 +13,12 @@
     },
     "investors": {
       "text": "Situational Awareness LP · Q3 2026 13F · 5 stock positions · top SHAZ 82.7%, CLEANS 7.3%, IREN 4.1%\nBerkshire Hathaway · Q3 2026 13F · 30 stock positions · top AAPL 25.0%, AXP 15.2%, KO 11.3%",
-      "ts": "2026-11-20T14:05+00:00",
+      "ts": "2026-11-21T01:05+00:00",
       "cadence_hours": 24
     },
     "xmarket": {
-      "text": "🚨 HIGH · @michaeljburry · EVS 3.7\nLatest alert Nov 20, 04:13 · 191 alerts sent since Apr 2026",
-      "ts": "2026-11-20T15:23+00:00",
+      "text": "🚨 CRITICAL · @BillAckman · EVS 5.1\nLatest alert Nov 20, 07:53 · 192 alerts sent since Apr 2026",
+      "ts": "2026-11-21T03:23+00:00",
       "cadence_hours": 24
     },
     "predict": {
@@ -28,7 +28,7 @@
     },
     "pelosi": {
       "text": "Latest PTR #20035780 · 1/1 trades parsed\n60-day window 2026-09-10 to 2026-11-09 · 2 trades charted · complete",
-      "ts": "2026-11-20T14:15+00:00",
+      "ts": "2026-11-21T02:15+00:00",
       "cadence_hours": 24
     }
   }
